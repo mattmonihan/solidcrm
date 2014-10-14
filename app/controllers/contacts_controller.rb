@@ -10,6 +10,17 @@ class ContactsController < ApplicationController
   # GET /contacts/1
   # GET /contacts/1.json
   def show
+
+
+    # This could go in an initializer
+    FullContact.configure do |config|
+        config.api_key = ENV["FULLCONTACT_API_KEY"]
+    end
+
+    # Get information about an email address
+    @fullcontact = FullContact.person(email: @contact.email)
+    puts @fullcontact
+
   end
 
   # GET /contacts/new
